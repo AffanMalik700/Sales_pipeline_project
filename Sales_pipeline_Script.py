@@ -23,9 +23,10 @@ for region in regions:
     region_df.to_sql(region, engine, if_exists='replace', index=False)
 
 # 6. Linear Regression
-X = df[['units_sold', 'unit_price', 'discount_pct', 'month']]
+X = df[['units_sold', 'unit_price', 'discount_pct', 'month']].copy()
 y = df['revenue']
-X['price_x_units'] = df['units_sold'] * df['unit_price']
+
+X['price_x_units'] = X['units_sold'] * X['unit_price']
 X = pd.get_dummies(X, columns=['month'])
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,random_state=42)
