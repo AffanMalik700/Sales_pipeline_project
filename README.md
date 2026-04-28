@@ -1,155 +1,142 @@
-# 📊 End-to-End Sales Data Pipeline with Machine Learning
-
-## 🚀 Overview
-
+📊 End-to-End Sales Data Pipeline with Machine Learning
+🚀 Overview
 This project builds a complete data pipeline that:
 
-* Ingests raw CSV sales data
-* Cleans and stores it in a PostgreSQL database
-* Segregates data by business use cases (regions)
-* Applies a machine learning model to predict revenue
-* Stores predictions back into the database
+Ingests raw CSV sales data
 
----
+Cleans and stores it in a PostgreSQL database
 
-## 🧠 Architecture
+Segregates data by business use cases (regions)
 
-```text
+Applies a machine learning model to predict revenue
+
+Stores predictions back into the database
+
+🧠 Architecture
+Plaintext
 CSV → Pandas → PostgreSQL → Feature Engineering → ML Model → Predictions → PostgreSQL
-```
+⚙️ Tech Stack
+Python (Pandas, NumPy)
 
----
+PostgreSQL
 
-## ⚙️ Tech Stack
+SQLAlchemy
 
-* Python (Pandas, NumPy)
-* PostgreSQL
-* SQLAlchemy
-* Scikit-learn
-* dotenv (for secure DB connection)
+Scikit-learn
 
----
+dotenv (for secure DB connection)
 
-## 📥 Data Ingestion
+📂 Repository File Structure
+Plaintext
+Sales_pipeline_project/
+│
+├── Sales_pipeline_Script.py   # Main Python script for ETL and ML pipeline
+├── ActualData.csv             # Raw dataset (Excluded via .gitignore)
+├── .env                       # Environment variables (DB credentials - DO NOT COMMIT)
+├── .gitignore                 # Specifies intentionally untracked files
+├── requirements.txt           # List of Python dependencies
+└── README.md                  # Project documentation
+📥 Data Ingestion
+Reads raw dataset (ActualData.csv) using Pandas
 
-* Reads raw dataset (`ActualData.csv`) using Pandas
-* Loads full dataset into PostgreSQL table: `sales`
+Loads full dataset into PostgreSQL table: sales
 
-```python
+Python
 df = pd.read_csv('ActualData.csv')
 df.to_sql('sales', engine, if_exists='replace', index=False)
-```
+🧩 Data Segregation
+Splits dataset by region
 
----
+Creates separate tables for each region
 
-## 🧩 Data Segregation
-
-* Splits dataset by `region`
-* Creates separate tables for each region
-
-```python
+Python
 regions = df['region'].unique()
-```
+👉 Enables region-specific analysis and use cases.
 
-👉 Enables region-specific analysis and use cases
+🧪 Feature Engineering
+Created interaction feature:
 
----
+price_x_units = units_sold * unit_price
 
-## 🧪 Feature Engineering
+Encoded categorical variable:
 
-* Created interaction feature:
+month → one-hot encoding
 
-  * `price_x_units = units_sold * unit_price`
-* Encoded categorical variable:
+🤖 Machine Learning Model
+Model Used:
+Linear Regression
 
-  * `month` → one-hot encoding
+Inputs:
+Units sold
 
----
+Unit price
 
-## 🤖 Machine Learning Model
+Discount percentage
 
-### Model Used:
+Month (encoded)
 
-* Linear Regression
+Engineered feature (price_x_units)
 
-### Inputs:
+📊 Model Evaluation
+R² Score: 0.9888 (measures how well the model explains variance)
 
-* Units sold
-* Unit price
-* Discount percentage
-* Month (encoded)
-* Engineered feature
+RMSE: 1348.89 (measures prediction error magnitude)
 
----
+🔮 Predictions Storage
+Predictions are stored in a new PostgreSQL table: predictions
 
-## 📊 Model Evaluation
-
-* R² Score (model accuracy)
-* RMSE (error metric)
-
-```text
-R² Score: measures how well model explains variance  
-RMSE: measures prediction error magnitude  
-```
-
----
-
-## 🔮 Predictions Storage
-
-* Predictions are stored in PostgreSQL table: `predictions`
-
-```python
+Python
 results_df.to_sql('predictions', engine, if_exists='replace', index=False)
-```
+🗄️ Database Tables
+sales → full master dataset
 
----
+region_* → segmented tables for specific territories
 
-## 🗄️ Database Tables
+predictions → ML output alongside actuals
 
-* `sales` → full dataset
-* `region_*` → segmented tables
-* `predictions` → ML output
+🔐 Environment Setup
+Uses a .env file to securely store database credentials so they are never exposed in the source code:
 
----
+Code snippet
+DB_URL="postgresql://username:password@localhost:5432/your_database_name"
+▶️ How to Run
+1. Clone the repository
 
-## 🔐 Environment Setup
+Bash
+git clone https://github.com/AffanMalik700/Sales_pipeline_project.git
+cd Sales_pipeline_project
+2. Set up a virtual environment (Recommended)
 
-Uses `.env` file to securely store database credentials:
+Bash
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+3. Install dependencies
 
-```env
-DB_URL=postgresql+psycopg://user@localhost:5432/sales_db
-```
-
----
-
-## ▶️ How to Run
-
-```bash
+Bash
 pip install -r requirements.txt
-python main.py
-```
+4. Run the pipeline
 
----
+Bash
+python Sales_pipeline_Script.py
+🎯 Key Learnings
+Built an end-to-end ETL pipeline
 
-## 🎯 Key Learnings
+Integrated SQL with Pandas
 
-* Built an end-to-end ETL pipeline
-* Integrated SQL with Pandas
-* Designed data segregation strategy
-* Applied feature engineering techniques
-* Deployed ML predictions into database
+Designed a data segregation strategy
 
----
+Applied feature engineering techniques
 
-## 🚧 Future Improvements
+Deployed ML predictions into a database
 
-* Automate pipeline (Airflow / cron)
-* Add data validation layer
-* Improve model (tree-based models)
-* Connect to cloud storage (AWS S3)
+🚧 Future Improvements
+[ ] Automate pipeline (Airflow / cron)
 
----
+[ ] Add data validation layer (Pydantic / Great Expectations)
 
-## 📌 Conclusion
+[ ] Improve model (Upgrade to tree-based models like XGBoost or Random Forest)
 
+[ ] Connect to cloud storage (Pull raw data directly from AWS S3)
+
+📌 Conclusion
 This project demonstrates how raw data can be transformed into structured, queryable, and predictive insights using a combination of data engineering and machine learning techniques.
