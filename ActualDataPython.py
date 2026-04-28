@@ -5,9 +5,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 import numpy as np
+from dotenv import load_dotenv
+import os
 # 2. Connect
-engine = create_engine('postgresql://affan@localhost:5432/sales_db')
-
+load_dotenv()
+engine = create_engine(os.getenv('DB_URL'))
 # 3. Read CSV
 df = pd.read_csv('ActualData.csv')
 
