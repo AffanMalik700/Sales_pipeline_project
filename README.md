@@ -1,10 +1,10 @@
-# 📊 Sales Data Pipeline with Machine Learning
+#  Sales Data Pipeline with Machine Learning
 
 An end-to-end data engineering and machine learning system that ingests raw sales data, transforms it into a structured relational database, and generates revenue predictions using a regression model.
 
 ---
 
-## 🚀 Overview
+##  Overview
 
 This project demonstrates how raw, unstructured data can be converted into a reliable, queryable, and predictive system.
 
@@ -16,9 +16,9 @@ It solves key real-world challenges:
 
 ---
 
-## 🧠 Key Features
+##  Key Features
 
-### 🔹 End-to-End Data Pipeline (ETL)
+###  End-to-End Data Pipeline (ETL)
 
 * Extracts raw data from CSV
 * Cleans and standardizes data using Pandas
@@ -26,7 +26,7 @@ It solves key real-world challenges:
 
 ---
 
-### 🔹 Data Segregation & Modeling
+###  Data Segregation & Modeling
 
 * Splits dataset into:
 
@@ -36,7 +36,7 @@ It solves key real-world challenges:
 
 ---
 
-### 🔹 Database Integration
+###  Database Integration
 
 * Uses SQLAlchemy to connect Python with PostgreSQL
 * Stores:
@@ -46,7 +46,7 @@ It solves key real-world challenges:
 
 ---
 
-### 🔹 Feature Engineering
+###  Feature Engineering
 
 * Created interaction feature:
 
@@ -57,14 +57,14 @@ It solves key real-world challenges:
 
 ---
 
-### 🔹 Machine Learning Model
+###  Machine Learning Model
 
 * Model: Linear Regression
 * Predicts: `revenue`
 
 ---
 
-## ⚙️ Tech Stack
+##  Tech Stack
 
 * **Backend:** Python
 * **Data Processing:** Pandas, NumPy
@@ -75,7 +75,7 @@ It solves key real-world challenges:
 
 ---
 
-## 🔄 Data Pipeline
+## Data Pipeline
 
 ```text id="bvrg5q"
 CSV → Pandas Cleaning → Data Segregation → PostgreSQL → Feature Engineering → ML Model → Predictions → PostgreSQL
@@ -83,7 +83,7 @@ CSV → Pandas Cleaning → Data Segregation → PostgreSQL → Feature Engineer
 
 ---
 
-## 🗄️ Database Design
+##  Database Design
 
 ### Customers Table
 
@@ -105,7 +105,7 @@ features | actual_revenue | predicted_revenue
 
 ---
 
-## 📊 Model Performance
+##  Model Performance
 
 * **R² Score:** 0.9888
 * **RMSE:** 1348.89
@@ -114,7 +114,7 @@ features | actual_revenue | predicted_revenue
 
 ---
 
-## 🔐 Environment Setup
+##  Environment Setup
 
 Database connection is managed securely using `.env`:
 
@@ -124,7 +124,7 @@ DB_URL=postgresql+psycopg:///sales_db
 
 ---
 
-## ▶️ How to Run
+##  How to Run
 
 ```bash id="l8sajx"
 git clone <your-repo-link>
@@ -139,7 +139,7 @@ python main.py
 
 ---
 
-## 💡 Key Learnings
+##  Key Learnings
 
 * Designing and implementing ETL pipelines
 * Transforming raw data into relational database structures
@@ -149,7 +149,7 @@ python main.py
 
 ---
 
-## 🚧 Future Improvements
+##  Future Improvements
 
 * Automate pipeline execution (Airflow / cron jobs)
 * Integrate cloud storage (AWS S3)
@@ -158,7 +158,7 @@ python main.py
 
 ---
 
-## 📌 Conclusion
+##  Conclusion
 
 This project demonstrates how to move beyond simple data analysis by building a complete system that:
 
